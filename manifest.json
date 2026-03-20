@@ -1,0 +1,13 @@
+{
+    "display_name": "Mini Minesweeper",
+    "loading_order": 100,
+    "requires": [],
+    "optional": [],
+    "dependencies": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "Antigravity",
+    "version": "1.0.0",
+    "homePage": "https://github.com/Etsuya233/st-minesweeper",
+    "auto_update": true
+}

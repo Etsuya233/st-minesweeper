@@ -1,6 +1,472 @@
 /* ============================================
    Mini Minesweeper - SillyTavern Extension
+   Theme System + Core Styles
    ============================================ */
+
+/* Google Fonts: pixel font for Win95 theme */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* ════════════════════════════════════════════
+   THEME: Default (Catppuccin Dark Glassmorphism)
+   ════════════════════════════════════════════ */
+[data-ms-theme="default"], #minesweeper-window:not([data-ms-theme]) {
+    /* Window */
+    --ms-window-bg: rgba(30, 30, 46, 0.95);
+    --ms-window-radius: 14px;
+    --ms-window-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    --ms-window-border: none;
+    --ms-window-backdrop: blur(20px);
+    --ms-font: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+    /* Titlebar */
+    --ms-titlebar-bg: rgba(255, 255, 255, 0.05);
+    --ms-titlebar-text: #cdd6f4;
+    --ms-titlebar-border: 1px solid rgba(255, 255, 255, 0.06);
+    /* Titlebar buttons */
+    --ms-titlebtn-bg: rgba(255, 255, 255, 0.06);
+    --ms-titlebtn-color: #a6adc8;
+    --ms-titlebtn-hover-bg: rgba(255, 255, 255, 0.12);
+    --ms-titlebtn-hover-color: #cdd6f4;
+    --ms-titlebtn-radius: 8px;
+    --ms-titlebtn-border: none;
+    --ms-close-hover-bg: rgba(243, 67, 67, 0.3);
+    --ms-close-hover-color: #f34343;
+    /* Toolbar */
+    --ms-toolbar-bg: rgba(255, 255, 255, 0.02);
+    --ms-toolbar-border: 1px solid rgba(255, 255, 255, 0.04);
+    --ms-counter-bg: rgba(0, 0, 0, 0.3);
+    --ms-counter-radius: 8px;
+    --ms-mine-color: #f38ba8;
+    --ms-timer-color: #94e2d5;
+    /* Face button */
+    --ms-face-bg: rgba(255, 255, 255, 0.05);
+    --ms-face-border: 2px solid rgba(255, 255, 255, 0.1);
+    --ms-face-radius: 10px;
+    --ms-face-hover-bg: rgba(255, 255, 255, 0.1);
+    /* Difficulty bar */
+    --ms-diff-bg: rgba(255, 255, 255, 0.02);
+    --ms-diff-border: 1px solid rgba(255, 255, 255, 0.04);
+    --ms-diff-btn-bg: rgba(255, 255, 255, 0.04);
+    --ms-diff-btn-border: 1px solid rgba(255, 255, 255, 0.08);
+    --ms-diff-btn-color: #a6adc8;
+    --ms-diff-btn-hover-bg: rgba(255, 255, 255, 0.08);
+    --ms-diff-btn-hover-color: #cdd6f4;
+    --ms-diff-btn-active-bg: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+    --ms-diff-btn-active-border: rgba(102, 126, 234, 0.4);
+    --ms-diff-btn-active-color: #cdd6f4;
+    --ms-diff-btn-radius: 8px;
+    /* Board */
+    --ms-board-bg: rgba(0, 0, 0, 0.2);
+    --ms-board-radius: 8px;
+    --ms-board-gap: 2px;
+    --ms-board-padding: 3px;
+    /* Cells */
+    --ms-cell-radius: 4px;
+    --ms-cell-covered-bg: linear-gradient(145deg, rgba(108, 112, 150, 0.5), rgba(80, 84, 118, 0.5));
+    --ms-cell-covered-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --ms-cell-covered-hover: linear-gradient(145deg, rgba(128, 132, 170, 0.55), rgba(100, 104, 138, 0.55));
+    --ms-cell-covered-active: rgba(80, 84, 118, 0.6);
+    --ms-cell-revealed-bg: rgba(40, 42, 60, 0.6);
+    --ms-cell-flagged-bg: linear-gradient(145deg, rgba(108, 112, 150, 0.5), rgba(80, 84, 118, 0.5));
+    --ms-cell-flagged-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --ms-cell-mine-bg: rgba(40, 42, 60, 0.6);
+    --ms-cell-exploded-bg: rgba(243, 67, 67, 0.35);
+    --ms-cell-wrong-bg: rgba(243, 139, 67, 0.25);
+    --ms-cell-border: none;
+    /* Number colors */
+    --ms-num-1: #89b4fa;
+    --ms-num-2: #a6e3a1;
+    --ms-num-3: #f38ba8;
+    --ms-num-4: #cba6f7;
+    --ms-num-5: #fab387;
+    --ms-num-6: #94e2d5;
+    --ms-num-7: #f5c2e7;
+    --ms-num-8: #bac2de;
+    /* Status bar */
+    --ms-statusbar-bg: rgba(255, 255, 255, 0.02);
+    --ms-statusbar-color: #6c7086;
+    --ms-statusbar-border: 1px solid rgba(255, 255, 255, 0.04);
+    --ms-best-color: #f9e2af;
+    /* Overlay */
+    --ms-overlay-bg: rgba(17, 17, 27, 0.75);
+    --ms-overlay-text: #cdd6f4;
+    --ms-overlay-subtext: #a6adc8;
+    --ms-overlay-btn-bg: linear-gradient(135deg, #667eea, #764ba2);
+    --ms-overlay-btn-color: #fff;
+    --ms-overlay-btn-radius: 10px;
+    /* Theme selector */
+    --ms-theme-btn-bg: rgba(255, 255, 255, 0.04);
+    --ms-theme-btn-border: 1px solid rgba(255, 255, 255, 0.08);
+    --ms-theme-btn-color: #a6adc8;
+    --ms-theme-btn-active-bg: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+    --ms-theme-btn-active-border: rgba(102, 126, 234, 0.4);
+    --ms-theme-btn-active-color: #cdd6f4;
+}
+
+/* FAB theme (on body level, matches window) */
+#minesweeper-fab[data-ms-theme="default"], #minesweeper-fab:not([data-ms-theme]) {
+    --ms-fab-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --ms-fab-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    --ms-fab-hover-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    --ms-fab-radius: 50%;
+    --ms-fab-border: none;
+}
+
+/* ════════════════════════════════════════════
+   THEME: Win95 Pixel
+   ════════════════════════════════════════════ */
+[data-ms-theme="win95"] {
+    --ms-window-bg: #c0c0c0;
+    --ms-window-radius: 0px;
+    --ms-window-shadow: inset -1px -1px 0 #000, inset 1px 1px 0 #fff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf;
+    --ms-window-border: 2px solid #c0c0c0;
+    --ms-window-backdrop: none;
+    --ms-font: 'VT323', 'MS Sans Serif', 'Segoe UI', Tahoma, monospace;
+    /* Titlebar */
+    --ms-titlebar-bg: linear-gradient(90deg, #000080, #1084d0);
+    --ms-titlebar-text: #fff;
+    --ms-titlebar-border: none;
+    /* Titlebar buttons */
+    --ms-titlebtn-bg: #c0c0c0;
+    --ms-titlebtn-color: #000;
+    --ms-titlebtn-hover-bg: #d4d0c8;
+    --ms-titlebtn-hover-color: #000;
+    --ms-titlebtn-radius: 0px;
+    --ms-titlebtn-border: outset 2px;
+    --ms-close-hover-bg: #c0c0c0;
+    --ms-close-hover-color: #000;
+    /* Toolbar */
+    --ms-toolbar-bg: #c0c0c0;
+    --ms-toolbar-border: 1px solid #808080;
+    --ms-counter-bg: #000;
+    --ms-counter-radius: 0px;
+    --ms-mine-color: #ff0000;
+    --ms-timer-color: #ff0000;
+    /* Face button */
+    --ms-face-bg: #c0c0c0;
+    --ms-face-border: outset 2px;
+    --ms-face-radius: 0px;
+    --ms-face-hover-bg: #d4d0c8;
+    /* Difficulty bar */
+    --ms-diff-bg: #c0c0c0;
+    --ms-diff-border: none;
+    --ms-diff-btn-bg: #c0c0c0;
+    --ms-diff-btn-border: outset 2px;
+    --ms-diff-btn-color: #000;
+    --ms-diff-btn-hover-bg: #d4d0c8;
+    --ms-diff-btn-hover-color: #000;
+    --ms-diff-btn-active-bg: #a0a0a0;
+    --ms-diff-btn-active-border: inset 2px;
+    --ms-diff-btn-active-color: #000;
+    --ms-diff-btn-radius: 0px;
+    /* Board */
+    --ms-board-bg: #808080;
+    --ms-board-radius: 0px;
+    --ms-board-gap: 1px;
+    --ms-board-padding: 3px;
+    /* Cells */
+    --ms-cell-radius: 0px;
+    --ms-cell-covered-bg: #c0c0c0;
+    --ms-cell-covered-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #fff, inset -2px -2px 0 #404040, inset 2px 2px 0 #dfdfdf;
+    --ms-cell-covered-hover: #d0d0d0;
+    --ms-cell-covered-active: #b0b0b0;
+    --ms-cell-revealed-bg: #c0c0c0;
+    --ms-cell-flagged-bg: #c0c0c0;
+    --ms-cell-flagged-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #fff, inset -2px -2px 0 #404040, inset 2px 2px 0 #dfdfdf;
+    --ms-cell-mine-bg: #c0c0c0;
+    --ms-cell-exploded-bg: #ff0000;
+    --ms-cell-wrong-bg: #c0c0c0;
+    --ms-cell-border: 1px solid #808080;
+    /* Number colors - classic Minesweeper */
+    --ms-num-1: #0000ff;
+    --ms-num-2: #008000;
+    --ms-num-3: #ff0000;
+    --ms-num-4: #000080;
+    --ms-num-5: #800000;
+    --ms-num-6: #008080;
+    --ms-num-7: #000000;
+    --ms-num-8: #808080;
+    /* Status bar */
+    --ms-statusbar-bg: #c0c0c0;
+    --ms-statusbar-color: #000;
+    --ms-statusbar-border: 1px solid #808080;
+    --ms-best-color: #800000;
+    /* Overlay */
+    --ms-overlay-bg: rgba(192, 192, 192, 0.9);
+    --ms-overlay-text: #000;
+    --ms-overlay-subtext: #404040;
+    --ms-overlay-btn-bg: #c0c0c0;
+    --ms-overlay-btn-color: #000;
+    --ms-overlay-btn-radius: 0px;
+    /* Theme selector */
+    --ms-theme-btn-bg: #c0c0c0;
+    --ms-theme-btn-border: outset 2px;
+    --ms-theme-btn-color: #000;
+    --ms-theme-btn-active-bg: #a0a0a0;
+    --ms-theme-btn-active-border: inset 2px;
+    --ms-theme-btn-active-color: #000;
+}
+
+#minesweeper-fab[data-ms-theme="win95"] {
+    --ms-fab-bg: #c0c0c0;
+    --ms-fab-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #fff;
+    --ms-fab-hover-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #fff;
+    --ms-fab-radius: 0px;
+    --ms-fab-border: outset 2px;
+    color: #000 !important;
+}
+
+/* Win95 extra: revealed cells get a thin inset border */
+[data-ms-theme="win95"] .ms-cell.revealed {
+    border: 1px solid #808080;
+    box-shadow: none;
+}
+
+/* Win95: overlay button style */
+[data-ms-theme="win95"] .ms-overlay-btn {
+    border: outset 2px !important;
+    box-shadow: none !important;
+}
+[data-ms-theme="win95"] .ms-overlay-btn:active {
+    border-style: inset !important;
+}
+
+/* ════════════════════════════════════════════
+   THEME: Win7 Aero
+   ════════════════════════════════════════════ */
+[data-ms-theme="win7"] {
+    --ms-window-bg: rgba(220, 235, 252, 0.82);
+    --ms-window-radius: 8px;
+    --ms-window-shadow: 0 0 0 1px rgba(60, 120, 200, 0.5), 0 8px 32px rgba(0, 0, 0, 0.3);
+    --ms-window-border: 1px solid rgba(120, 170, 240, 0.6);
+    --ms-window-backdrop: blur(16px) saturate(1.5);
+    --ms-font: 'Segoe UI', system-ui, sans-serif;
+    /* Titlebar */
+    --ms-titlebar-bg: linear-gradient(180deg, rgba(200, 225, 255, 0.9) 0%, rgba(160, 195, 240, 0.85) 45%, rgba(130, 175, 230, 0.8) 50%, rgba(170, 205, 250, 0.85) 100%);
+    --ms-titlebar-text: #1a3a5c;
+    --ms-titlebar-border: 1px solid rgba(120, 170, 240, 0.3);
+    /* Titlebar buttons */
+    --ms-titlebtn-bg: linear-gradient(180deg, rgba(220, 235, 255, 0.9), rgba(180, 205, 240, 0.9));
+    --ms-titlebtn-color: #2a4a6c;
+    --ms-titlebtn-hover-bg: linear-gradient(180deg, rgba(240, 245, 255, 0.95), rgba(200, 220, 250, 0.95));
+    --ms-titlebtn-hover-color: #1a3a5c;
+    --ms-titlebtn-radius: 4px;
+    --ms-titlebtn-border: 1px solid rgba(100, 150, 220, 0.5);
+    --ms-close-hover-bg: linear-gradient(180deg, #f28b82, #e05252);
+    --ms-close-hover-color: #fff;
+    /* Toolbar */
+    --ms-toolbar-bg: rgba(210, 230, 255, 0.5);
+    --ms-toolbar-border: 1px solid rgba(120, 170, 240, 0.2);
+    --ms-counter-bg: rgba(0, 20, 60, 0.75);
+    --ms-counter-radius: 4px;
+    --ms-mine-color: #ff4444;
+    --ms-timer-color: #44ff88;
+    /* Face button */
+    --ms-face-bg: linear-gradient(180deg, rgba(230, 240, 255, 0.9), rgba(190, 215, 250, 0.9));
+    --ms-face-border: 1px solid rgba(100, 150, 220, 0.5);
+    --ms-face-radius: 6px;
+    --ms-face-hover-bg: linear-gradient(180deg, rgba(240, 248, 255, 0.95), rgba(210, 230, 255, 0.95));
+    /* Difficulty bar */
+    --ms-diff-bg: rgba(210, 230, 255, 0.3);
+    --ms-diff-border: 1px solid rgba(120, 170, 240, 0.15);
+    --ms-diff-btn-bg: linear-gradient(180deg, rgba(230, 240, 255, 0.8), rgba(200, 220, 250, 0.8));
+    --ms-diff-btn-border: 1px solid rgba(100, 150, 220, 0.4);
+    --ms-diff-btn-color: #2a4a6c;
+    --ms-diff-btn-hover-bg: linear-gradient(180deg, rgba(240, 248, 255, 0.9), rgba(215, 232, 255, 0.9));
+    --ms-diff-btn-hover-color: #1a3a5c;
+    --ms-diff-btn-active-bg: linear-gradient(180deg, rgba(180, 210, 250, 0.9), rgba(140, 180, 235, 0.9));
+    --ms-diff-btn-active-border: rgba(70, 130, 210, 0.6);
+    --ms-diff-btn-active-color: #0a2a4c;
+    --ms-diff-btn-radius: 4px;
+    /* Board */
+    --ms-board-bg: rgba(100, 140, 200, 0.25);
+    --ms-board-radius: 6px;
+    --ms-board-gap: 2px;
+    --ms-board-padding: 3px;
+    /* Cells */
+    --ms-cell-radius: 3px;
+    --ms-cell-covered-bg: linear-gradient(180deg, rgba(210, 230, 255, 0.85), rgba(180, 205, 245, 0.85));
+    --ms-cell-covered-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.1);
+    --ms-cell-covered-hover: linear-gradient(180deg, rgba(225, 240, 255, 0.9), rgba(200, 220, 250, 0.9));
+    --ms-cell-covered-active: rgba(160, 190, 235, 0.9);
+    --ms-cell-revealed-bg: rgba(235, 242, 255, 0.65);
+    --ms-cell-flagged-bg: linear-gradient(180deg, rgba(210, 230, 255, 0.85), rgba(180, 205, 245, 0.85));
+    --ms-cell-flagged-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.1);
+    --ms-cell-mine-bg: rgba(235, 242, 255, 0.65);
+    --ms-cell-exploded-bg: rgba(255, 80, 80, 0.5);
+    --ms-cell-wrong-bg: rgba(255, 180, 80, 0.4);
+    --ms-cell-border: none;
+    /* Number colors */
+    --ms-num-1: #1a5cc8;
+    --ms-num-2: #2a8c2a;
+    --ms-num-3: #d03030;
+    --ms-num-4: #4a2a8c;
+    --ms-num-5: #8c2a2a;
+    --ms-num-6: #2a8c8c;
+    --ms-num-7: #333;
+    --ms-num-8: #666;
+    /* Status bar */
+    --ms-statusbar-bg: rgba(210, 230, 255, 0.3);
+    --ms-statusbar-color: #4a6a8c;
+    --ms-statusbar-border: 1px solid rgba(120, 170, 240, 0.15);
+    --ms-best-color: #d4880a;
+    /* Overlay */
+    --ms-overlay-bg: rgba(200, 220, 250, 0.85);
+    --ms-overlay-text: #1a3a5c;
+    --ms-overlay-subtext: #4a6a8c;
+    --ms-overlay-btn-bg: linear-gradient(180deg, #5ea0ef, #3a7cd5);
+    --ms-overlay-btn-color: #fff;
+    --ms-overlay-btn-radius: 6px;
+    /* Theme selector */
+    --ms-theme-btn-bg: linear-gradient(180deg, rgba(230, 240, 255, 0.8), rgba(200, 220, 250, 0.8));
+    --ms-theme-btn-border: 1px solid rgba(100, 150, 220, 0.4);
+    --ms-theme-btn-color: #2a4a6c;
+    --ms-theme-btn-active-bg: linear-gradient(180deg, rgba(180, 210, 250, 0.9), rgba(140, 180, 235, 0.9));
+    --ms-theme-btn-active-border: rgba(70, 130, 210, 0.6);
+    --ms-theme-btn-active-color: #0a2a4c;
+}
+
+#minesweeper-fab[data-ms-theme="win7"] {
+    --ms-fab-bg: linear-gradient(180deg, rgba(120, 185, 255, 0.9), rgba(60, 130, 220, 0.9));
+    --ms-fab-shadow: 0 2px 10px rgba(60, 130, 220, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    --ms-fab-hover-shadow: 0 4px 16px rgba(60, 130, 220, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    --ms-fab-radius: 50%;
+    --ms-fab-border: 1px solid rgba(60, 130, 220, 0.6);
+}
+
+/* ════════════════════════════════════════════
+   THEME: macOS Aqua
+   ════════════════════════════════════════════ */
+[data-ms-theme="aqua"] {
+    --ms-window-bg: linear-gradient(180deg, #e8e8e8 0%, #f5f5f5 100%);
+    --ms-window-radius: 10px;
+    --ms-window-shadow: 0 10px 40px rgba(0, 0, 0, 0.25), 0 0 0 0.5px rgba(0, 0, 0, 0.15);
+    --ms-window-border: none;
+    --ms-window-backdrop: none;
+    --ms-font: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
+    /* Titlebar - brushed metal with stripes */
+    --ms-titlebar-bg: linear-gradient(180deg, #e8e8e8 0%, #d4d4d4 45%, #c8c8c8 50%, #d8d8d8 100%);
+    --ms-titlebar-text: #333;
+    --ms-titlebar-border: 1px solid #b0b0b0;
+    /* Titlebar buttons */
+    --ms-titlebtn-bg: linear-gradient(180deg, #f8f8f8, #ddd);
+    --ms-titlebtn-color: #555;
+    --ms-titlebtn-hover-bg: linear-gradient(180deg, #fff, #e8e8e8);
+    --ms-titlebtn-hover-color: #333;
+    --ms-titlebtn-radius: 10px;
+    --ms-titlebtn-border: 1px solid #aaa;
+    --ms-close-hover-bg: linear-gradient(180deg, #ff6b6b, #e04040);
+    --ms-close-hover-color: #fff;
+    /* Toolbar */
+    --ms-toolbar-bg: #ececec;
+    --ms-toolbar-border: 1px solid #ccc;
+    --ms-counter-bg: rgba(0, 0, 0, 0.06);
+    --ms-counter-radius: 6px;
+    --ms-mine-color: #e04040;
+    --ms-timer-color: #2a8c4a;
+    /* Face button */
+    --ms-face-bg: linear-gradient(180deg, #f8f8f8, #e0e0e0);
+    --ms-face-border: 1px solid #aaa;
+    --ms-face-radius: 8px;
+    --ms-face-hover-bg: linear-gradient(180deg, #fff, #eee);
+    /* Difficulty bar */
+    --ms-diff-bg: #e8e8e8;
+    --ms-diff-border: 1px solid #ccc;
+    --ms-diff-btn-bg: linear-gradient(180deg, #fafafa, #e2e2e2);
+    --ms-diff-btn-border: 1px solid #bbb;
+    --ms-diff-btn-color: #444;
+    --ms-diff-btn-hover-bg: linear-gradient(180deg, #fff, #eee);
+    --ms-diff-btn-hover-color: #222;
+    --ms-diff-btn-active-bg: linear-gradient(180deg, #58a8fb, #2680eb);
+    --ms-diff-btn-active-border: #1a6dd5;
+    --ms-diff-btn-active-color: #fff;
+    --ms-diff-btn-radius: 6px;
+    /* Board */
+    --ms-board-bg: rgba(0, 0, 0, 0.08);
+    --ms-board-radius: 6px;
+    --ms-board-gap: 2px;
+    --ms-board-padding: 3px;
+    /* Cells - gel/aqua buttons */
+    --ms-cell-radius: 4px;
+    --ms-cell-covered-bg: linear-gradient(180deg, #f0f0f0, #d8d8d8);
+    --ms-cell-covered-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.12);
+    --ms-cell-covered-hover: linear-gradient(180deg, #f8f8f8, #e4e4e4);
+    --ms-cell-covered-active: #c8c8c8;
+    --ms-cell-revealed-bg: #f0f0f0;
+    --ms-cell-flagged-bg: linear-gradient(180deg, #f0f0f0, #d8d8d8);
+    --ms-cell-flagged-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.12);
+    --ms-cell-mine-bg: #f0f0f0;
+    --ms-cell-exploded-bg: rgba(255, 60, 60, 0.35);
+    --ms-cell-wrong-bg: rgba(255, 160, 60, 0.3);
+    --ms-cell-border: none;
+    /* Number colors */
+    --ms-num-1: #0066cc;
+    --ms-num-2: #339933;
+    --ms-num-3: #cc3333;
+    --ms-num-4: #6633aa;
+    --ms-num-5: #cc6600;
+    --ms-num-6: #009999;
+    --ms-num-7: #444;
+    --ms-num-8: #888;
+    /* Status bar */
+    --ms-statusbar-bg: #e4e4e4;
+    --ms-statusbar-color: #666;
+    --ms-statusbar-border: 1px solid #ccc;
+    --ms-best-color: #d48806;
+    /* Overlay */
+    --ms-overlay-bg: rgba(240, 240, 240, 0.9);
+    --ms-overlay-text: #333;
+    --ms-overlay-subtext: #666;
+    --ms-overlay-btn-bg: linear-gradient(180deg, #58a8fb, #2680eb);
+    --ms-overlay-btn-color: #fff;
+    --ms-overlay-btn-radius: 8px;
+    /* Theme selector */
+    --ms-theme-btn-bg: linear-gradient(180deg, #fafafa, #e2e2e2);
+    --ms-theme-btn-border: 1px solid #bbb;
+    --ms-theme-btn-color: #444;
+    --ms-theme-btn-active-bg: linear-gradient(180deg, #58a8fb, #2680eb);
+    --ms-theme-btn-active-border: #1a6dd5;
+    --ms-theme-btn-active-color: #fff;
+}
+
+#minesweeper-fab[data-ms-theme="aqua"] {
+    --ms-fab-bg: linear-gradient(180deg, #6eb8ff 0%, #2680eb 50%, #1a6dd5 100%);
+    --ms-fab-shadow: 0 3px 12px rgba(38, 128, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    --ms-fab-hover-shadow: 0 5px 18px rgba(38, 128, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    --ms-fab-radius: 50%;
+    --ms-fab-border: 1px solid rgba(28, 100, 200, 0.6);
+}
+
+/* Aqua: traffic light titlebar buttons */
+[data-ms-theme="aqua"] .ms-titlebar-btn.ms-close {
+    background: linear-gradient(180deg, #ff6058, #e03030) !important;
+    border: 1px solid #c72020 !important;
+    color: transparent !important;
+    width: 14px !important;
+    height: 14px !important;
+    border-radius: 50% !important;
+    font-size: 0 !important;
+}
+[data-ms-theme="aqua"] .ms-titlebar-btn.ms-close:hover {
+    background: linear-gradient(180deg, #ff7b74, #e04040) !important;
+    color: transparent !important;
+}
+[data-ms-theme="aqua"] .ms-titlebar-btn.ms-minimize {
+    background: linear-gradient(180deg, #ffbd2e, #e0a020) !important;
+    border: 1px solid #c08a18 !important;
+    color: transparent !important;
+    width: 14px !important;
+    height: 14px !important;
+    border-radius: 50% !important;
+    font-size: 0 !important;
+}
+[data-ms-theme="aqua"] .ms-titlebar-btn.ms-minimize:hover {
+    background: linear-gradient(180deg, #ffd060, #e0b030) !important;
+    color: transparent !important;
+}
+
+/* ════════════════════════════════════════════
+   CORE STYLES (use CSS variables)
+   ════════════════════════════════════════════ */
 
 /* ---------- Floating Action Button ---------- */
 #minesweeper-fab {
@@ -9,14 +475,14 @@
     bottom: auto;
     width: 52px;
     height: 52px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
+    border-radius: var(--ms-fab-radius, 50%);
+    background: var(--ms-fab-bg, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    border: var(--ms-fab-border, none);
     color: #fff;
     font-size: 24px;
     cursor: pointer;
     z-index: 10000;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: var(--ms-fab-shadow, 0 4px 15px rgba(102, 126, 234, 0.4));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,7 +493,7 @@
 
 #minesweeper-fab:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    box-shadow: var(--ms-fab-hover-shadow, 0 6px 20px rgba(102, 126, 234, 0.6));
 }
 
 #minesweeper-fab:active {
@@ -44,15 +510,16 @@
     max-width: 95vw;
     max-height: 95vh;
     z-index: 10001;
-    border-radius: 14px;
+    border-radius: var(--ms-window-radius);
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    box-shadow: var(--ms-window-shadow);
+    border: var(--ms-window-border);
     display: none;
     flex-direction: column;
-    background: rgba(30, 30, 46, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--ms-window-bg);
+    backdrop-filter: var(--ms-window-backdrop);
+    -webkit-backdrop-filter: var(--ms-window-backdrop);
+    font-family: var(--ms-font);
 }
 
 #minesweeper-window.visible {
@@ -86,10 +553,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--ms-titlebar-bg);
     cursor: grab;
     user-select: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: var(--ms-titlebar-border);
 }
 
 #minesweeper-titlebar:active {
@@ -99,7 +566,7 @@
 #minesweeper-titlebar .ms-title {
     font-size: 14px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: var(--ms-titlebar-text);
     letter-spacing: 0.3px;
 }
 
@@ -115,10 +582,10 @@
 .ms-titlebar-btn {
     width: 28px;
     height: 28px;
-    border-radius: 8px;
-    border: none;
-    background: rgba(255, 255, 255, 0.06);
-    color: #a6adc8;
+    border-radius: var(--ms-titlebtn-radius);
+    border: var(--ms-titlebtn-border);
+    background: var(--ms-titlebtn-bg);
+    color: var(--ms-titlebtn-color);
     font-size: 14px;
     cursor: pointer;
     display: flex;
@@ -128,13 +595,13 @@
 }
 
 .ms-titlebar-btn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #cdd6f4;
+    background: var(--ms-titlebtn-hover-bg);
+    color: var(--ms-titlebtn-hover-color);
 }
 
 .ms-titlebar-btn.ms-close:hover {
-    background: rgba(243, 67, 67, 0.3);
-    color: #f34343;
+    background: var(--ms-close-hover-bg);
+    color: var(--ms-close-hover-color);
 }
 
 /* ---------- Toolbar ---------- */
@@ -143,8 +610,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    background: var(--ms-toolbar-bg);
+    border-bottom: var(--ms-toolbar-border);
     gap: 10px;
 }
 
@@ -152,28 +619,28 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--ms-counter-bg);
     padding: 5px 10px;
-    border-radius: 8px;
+    border-radius: var(--ms-counter-radius);
     font-family: 'Consolas', 'Courier New', monospace;
     font-size: 16px;
     font-weight: 700;
-    color: #f38ba8;
+    color: var(--ms-mine-color);
     min-width: 52px;
     justify-content: center;
     letter-spacing: 1px;
 }
 
 .ms-counter.ms-timer {
-    color: #94e2d5;
+    color: var(--ms-timer-color);
 }
 
 #minesweeper-face-btn {
     width: 38px;
     height: 38px;
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--ms-face-radius);
+    border: var(--ms-face-border);
+    background: var(--ms-face-bg);
     font-size: 20px;
     cursor: pointer;
     display: flex;
@@ -183,8 +650,7 @@
 }
 
 #minesweeper-face-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--ms-face-hover-bg);
 }
 
 #minesweeper-face-btn:active {
@@ -196,17 +662,17 @@
     display: flex;
     padding: 6px 14px 8px;
     gap: 6px;
-    background: rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    background: var(--ms-diff-bg);
+    border-bottom: var(--ms-diff-border);
 }
 
 .ms-diff-btn {
     flex: 1;
     padding: 5px 8px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.04);
-    color: #a6adc8;
+    border-radius: var(--ms-diff-btn-radius);
+    border: var(--ms-diff-btn-border);
+    background: var(--ms-diff-btn-bg);
+    color: var(--ms-diff-btn-color);
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
@@ -215,14 +681,49 @@
 }
 
 .ms-diff-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #cdd6f4;
+    background: var(--ms-diff-btn-hover-bg);
+    color: var(--ms-diff-btn-hover-color);
 }
 
 .ms-diff-btn.active {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
-    border-color: rgba(102, 126, 234, 0.4);
-    color: #cdd6f4;
+    background: var(--ms-diff-btn-active-bg);
+    border-color: var(--ms-diff-btn-active-border);
+    color: var(--ms-diff-btn-active-color);
+    font-weight: 600;
+}
+
+/* ---------- Theme Selector ---------- */
+#minesweeper-theme-bar {
+    display: flex;
+    padding: 4px 14px 6px;
+    gap: 6px;
+    background: var(--ms-diff-bg);
+    border-bottom: var(--ms-diff-border);
+}
+
+.ms-theme-btn {
+    flex: 1;
+    padding: 4px 6px;
+    border-radius: var(--ms-diff-btn-radius);
+    border: var(--ms-theme-btn-border);
+    background: var(--ms-theme-btn-bg);
+    color: var(--ms-theme-btn-color);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.ms-theme-btn:hover {
+    opacity: 0.85;
+}
+
+.ms-theme-btn.active {
+    background: var(--ms-theme-btn-active-bg);
+    border-color: var(--ms-theme-btn-active-border);
+    color: var(--ms-theme-btn-active-color);
     font-weight: 600;
 }
 
@@ -236,10 +737,10 @@
 
 #minesweeper-board {
     display: inline-grid;
-    gap: 2px;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 3px;
-    border-radius: 8px;
+    gap: var(--ms-board-gap);
+    background: var(--ms-board-bg);
+    padding: var(--ms-board-padding);
+    border-radius: var(--ms-board-radius);
     /* Prevent text selection & callout on mobile long press */
     -webkit-user-select: none;
     user-select: none;
@@ -251,8 +752,8 @@
 .ms-cell {
     width: 30px;
     height: 30px;
-    border-radius: 4px;
-    border: none;
+    border-radius: var(--ms-cell-radius);
+    border: var(--ms-cell-border);
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
@@ -266,31 +767,31 @@
 }
 
 .ms-cell.covered {
-    background: linear-gradient(145deg, rgba(108, 112, 150, 0.5), rgba(80, 84, 118, 0.5));
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    background: var(--ms-cell-covered-bg);
+    box-shadow: var(--ms-cell-covered-shadow);
 }
 
 .ms-cell.covered:hover {
-    background: linear-gradient(145deg, rgba(128, 132, 170, 0.55), rgba(100, 104, 138, 0.55));
+    background: var(--ms-cell-covered-hover);
 }
 
 .ms-cell.covered:active {
     transform: scale(0.92);
-    background: rgba(80, 84, 118, 0.6);
+    background: var(--ms-cell-covered-active);
 }
 
 .ms-cell.revealed {
-    background: rgba(40, 42, 60, 0.6);
+    background: var(--ms-cell-revealed-bg);
     cursor: default;
 }
 
 .ms-cell.flagged {
-    background: linear-gradient(145deg, rgba(108, 112, 150, 0.5), rgba(80, 84, 118, 0.5));
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    background: var(--ms-cell-flagged-bg);
+    box-shadow: var(--ms-cell-flagged-shadow);
 }
 
 .ms-cell.mine-exploded {
-    background: rgba(243, 67, 67, 0.35) !important;
+    background: var(--ms-cell-exploded-bg) !important;
     animation: ms-explode 0.3s ease-out;
 }
 
@@ -301,35 +802,35 @@
 }
 
 .ms-cell.mine-shown {
-    background: rgba(40, 42, 60, 0.6);
+    background: var(--ms-cell-mine-bg);
 }
 
 .ms-cell.wrong-flag {
-    background: rgba(243, 139, 67, 0.25);
+    background: var(--ms-cell-wrong-bg);
 }
 
-/* Number colors (Catppuccin Mocha inspired) */
-.ms-cell[data-number="1"] { color: #89b4fa; }
-.ms-cell[data-number="2"] { color: #a6e3a1; }
-.ms-cell[data-number="3"] { color: #f38ba8; }
-.ms-cell[data-number="4"] { color: #cba6f7; }
-.ms-cell[data-number="5"] { color: #fab387; }
-.ms-cell[data-number="6"] { color: #94e2d5; }
-.ms-cell[data-number="7"] { color: #f5c2e7; }
-.ms-cell[data-number="8"] { color: #bac2de; }
+/* Number colors */
+.ms-cell[data-number="1"] { color: var(--ms-num-1); }
+.ms-cell[data-number="2"] { color: var(--ms-num-2); }
+.ms-cell[data-number="3"] { color: var(--ms-num-3); }
+.ms-cell[data-number="4"] { color: var(--ms-num-4); }
+.ms-cell[data-number="5"] { color: var(--ms-num-5); }
+.ms-cell[data-number="6"] { color: var(--ms-num-6); }
+.ms-cell[data-number="7"] { color: var(--ms-num-7); }
+.ms-cell[data-number="8"] { color: var(--ms-num-8); }
 
 /* ---------- Status Bar ---------- */
 #minesweeper-statusbar {
     padding: 8px 14px;
     text-align: center;
     font-size: 12px;
-    color: #6c7086;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-    background: rgba(255, 255, 255, 0.02);
+    color: var(--ms-statusbar-color);
+    border-top: var(--ms-statusbar-border);
+    background: var(--ms-statusbar-bg);
 }
 
 #minesweeper-statusbar .ms-best-time {
-    color: #f9e2af;
+    color: var(--ms-best-color);
 }
 
 /* ---------- Game Over Overlay ---------- */
@@ -339,14 +840,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(17, 17, 27, 0.75);
+    background: var(--ms-overlay-bg);
     backdrop-filter: blur(4px);
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 10;
-    border-radius: 14px;
+    border-radius: var(--ms-window-radius);
 }
 
 .ms-game-overlay.visible {
@@ -367,22 +868,22 @@
 .ms-game-overlay .ms-overlay-text {
     font-size: 18px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: var(--ms-overlay-text);
     margin-bottom: 6px;
 }
 
 .ms-game-overlay .ms-overlay-subtext {
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--ms-overlay-subtext);
     margin-bottom: 18px;
 }
 
 .ms-game-overlay .ms-overlay-btn {
     padding: 10px 28px;
-    border-radius: 10px;
+    border-radius: var(--ms-overlay-btn-radius);
     border: none;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
+    background: var(--ms-overlay-btn-bg);
+    color: var(--ms-overlay-btn-color);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -391,7 +892,7 @@
 
 .ms-game-overlay .ms-overlay-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .ms-game-overlay .ms-overlay-btn:active {
@@ -407,7 +908,7 @@
     }
 
     #minesweeper-window {
-        border-radius: 10px;
+        border-radius: var(--ms-window-radius, 10px);
     }
 
     /* Position the window properly when NOT yet dragged */

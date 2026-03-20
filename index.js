@@ -37,9 +37,18 @@
         hard:   { rows: 16, cols: 30, mines: 99, label: '高级' },
     };
 
+    // ── Theme Presets ─────────────────────────────
+    const THEMES = {
+        default: { label: '🌙' },
+        win95:   { label: '🖥️' },
+        win7:    { label: '✨' },
+        aqua:    { label: '🍎' },
+    };
+
     // ── Default Settings ───────────────────────
     const defaultSettings = Object.freeze({
         difficulty: 'easy',
+        theme: 'default',
         bestTimes: { easy: null, medium: null, hard: null },
         fabEnabled: true,
         fabSize: 52,
@@ -78,6 +87,19 @@
     function saveSettings() {
         const { saveSettingsDebounced } = SillyTavern.getContext();
         saveSettingsDebounced();
+    }
+
+    // ── Theme Application ──────────────────────
+    function applyTheme(themeId) {
+        const id = THEMES[themeId] ? themeId : 'default';
+        const win = document.getElementById('minesweeper-window');
+        const fab = document.getElementById('minesweeper-fab');
+        if (win) win.setAttribute('data-ms-theme', id);
+        if (fab) fab.setAttribute('data-ms-theme', id);
+        // Update theme buttons active state
+        document.querySelectorAll('.ms-theme-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.theme === id);
+        });
     }
 
     // ── FAB Positioning ────────────────────────
@@ -224,6 +246,9 @@
                 <button class="ms-diff-btn" data-diff="medium">中级</button>
                 <button class="ms-diff-btn" data-diff="hard">高级</button>
             </div>
+            <div id="minesweeper-theme-bar">
+                ${Object.entries(THEMES).map(([id, t]) => `<button class="ms-theme-btn" data-theme="${id}">${t.label}</button>`).join('')}
+            </div>
             <div id="minesweeper-board-container">
                 <div id="minesweeper-board"></div>
             </div>
@@ -261,6 +286,17 @@
             });
         });
 
+        // Theme buttons
+        win.querySelectorAll('.ms-theme-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const themeId = btn.dataset.theme;
+                const settings = getSettings();
+                settings.theme = themeId;
+                saveSettings();
+                applyTheme(themeId);
+            });
+        });
+
         // Drag support
         initDrag(win, win.querySelector('#minesweeper-titlebar'));
 
@@ -270,6 +306,9 @@
         win.querySelectorAll('.ms-diff-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.diff === savedDiff);
         });
+
+        // Init theme from settings
+        applyTheme(settings.theme || 'default');
     }
 
     // ── Window Visibility ──────────────────────
@@ -803,6 +842,13 @@
                             <input type="range" id="ms-set-fab-opacity" min="20" max="100" value="${settings.fabOpacity}" />
                         </label>
 
+                        <label class="ms-setting-row">
+                            <span>主题</span>
+                            <select id="ms-set-theme">
+                                ${Object.entries(THEMES).map(([id, t]) => `<option value="${id}" ${settings.theme === id ? 'selected' : ''}>${t.label}</option>`).join('')}
+                            </select>
+                        </label>
+
                         <div class="ms-setting-row ms-setting-actions">
                             <button id="ms-set-reset-pos" class="menu_button menu_button_default">重置位置</button>
                         </div>
@@ -839,7 +885,12 @@
             if (fab) applyFabSettings(fab);
         });
 
-
+        document.getElementById('ms-set-theme').addEventListener('change', (e) => {
+            const s = getSettings();
+            s.theme = e.target.value;
+            saveSettings();
+            applyTheme(s.theme);
+        });
 
         document.getElementById('ms-set-reset-pos').addEventListener('click', () => {
             const s = getSettings();

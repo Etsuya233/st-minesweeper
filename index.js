@@ -259,7 +259,10 @@
                 <div class="ms-overlay-emoji" id="ms-overlay-emoji">🎉</div>
                 <div class="ms-overlay-text" id="ms-overlay-text">恭喜!</div>
                 <div class="ms-overlay-subtext" id="ms-overlay-subtext"></div>
-                <button class="ms-overlay-btn" id="ms-overlay-btn">再来一局</button>
+                <div class="ms-overlay-actions">
+                    <button class="ms-overlay-btn" id="ms-overlay-btn">再来一局</button>
+                    <button class="ms-overlay-btn ms-overlay-btn-secondary" id="ms-overlay-view-btn">查看战局</button>
+                </div>
             </div>
         `;
         document.body.appendChild(win);
@@ -271,6 +274,9 @@
         win.querySelector('#ms-overlay-btn').addEventListener('click', () => {
             hideOverlay();
             newGame();
+        });
+        win.querySelector('#ms-overlay-view-btn').addEventListener('click', () => {
+            hideOverlay();
         });
 
         // Difficulty buttons

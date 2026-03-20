@@ -899,6 +899,24 @@
     transform: scale(0.97);
 }
 
+.ms-overlay-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.ms-game-overlay .ms-overlay-btn.ms-overlay-btn-secondary {
+    background: transparent;
+    color: var(--ms-overlay-text);
+    border: 1px solid var(--ms-overlay-subtext);
+    opacity: 0.8;
+}
+
+.ms-game-overlay .ms-overlay-btn.ms-overlay-btn-secondary:hover {
+    opacity: 1;
+    background: rgba(128, 128, 128, 0.1);
+}
+
 /* ---------- Responsive (SillyTavern mobile breakpoint = 1000px) ---------- */
 @media (max-width: 1000px) {
     .ms-cell {
